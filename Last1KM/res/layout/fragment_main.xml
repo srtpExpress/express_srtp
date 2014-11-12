@@ -6,6 +6,7 @@
     android:background="#f1f1f6"
     tools:context="com.example.last1km.MainActivity$PlaceholderFragment" >
 
+    <!-- 顶部标题栏 -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -31,6 +32,7 @@
         
     </FrameLayout>
     
+    <!-- 白色统计数量栏 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="90dp"
@@ -74,7 +76,8 @@
 
     </LinearLayout>
 		   
-		<ImageView
+		<!-- 取件大按钮 -->
+    	<ImageView
 		    android:id="@+id/main_get_button"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
@@ -83,6 +86,7 @@
 		    android:layout_marginRight="40dp"
 		    android:src="@drawable/main_get_button" />
 
+		<!-- 点赞分享按钮 -->
 		<LinearLayout
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
@@ -108,7 +112,5 @@
 		        android:src="@drawable/main_share_button" />
 		    		    
 		</LinearLayout>
-		
-
 
 </LinearLayout>
