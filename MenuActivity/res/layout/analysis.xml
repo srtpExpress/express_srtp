@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center" >
+
+    <TextView
+        android:id="@+id/TimeZone"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:scaleType="centerCrop"
+        android:text="2014.10.01  -  2014.12.29"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/gray"
+         />
+
+    <ImageView
+        android:id="@+id/iv_qr_image2"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="100dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:scaleType="centerCrop"
+         android:src="@drawable/analysis_edit_0004" />
+
+    <ImageView
+        android:id="@+id/iv_qr_image3"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="420dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:scaleType="centerCrop"
+        android:src="@drawable/analysis_edit_0005" />
+
+    <Button
+        android:id="@+id/ana_button1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="420dp"
+        android:layout_marginLeft="30dp"
+        android:gravity="center"
+		android:paddingTop="20dp"
+        android:textSize="30sp"
+        android:textColor="#ffffffff"
+        android:background="@drawable/analysis_button_selector"
+         />
+
+    <Button
+        android:id="@+id/ana_button2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="420dp"
+        android:layout_marginLeft="130dp"
+        android:gravity="center"
+		android:paddingTop="20dp"
+        android:textSize="30sp"
+        android:textColor="#ffffffff"
+        android:background="@drawable/analysis_button_selector"
+		/>
+        
+    <Button
+        android:id="@+id/ana_button3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="420dp"
+        android:layout_marginLeft="230dp"
+        android:gravity="center"
+		android:paddingTop="20dp"
+        android:textSize="30sp"
+        android:textColor="#ffffffff"
+        android:background="@drawable/analysis_button_selector"
+        />
+
+    <TextView
+        android:id="@+id/ana_textView_total"
+        android:layout_width="134dp"
+        android:layout_height="129dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="180dp"
+        android:gravity="center"
+        android:textSize="100sp"
+        android:textStyle="bold|normal"
+        android:textColor="@color/gray"
+         />
+
+</FrameLayout>
+        <!-- android:background="#3f535e55" -->
+        <!-- android:background="#99c9c9ff" -->
+        <!-- android:background="#887974" -->

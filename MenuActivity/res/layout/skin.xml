@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="#111"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/backgroundButton1"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="90dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="150dp"
+        android:layout_height="250dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:background="@drawable/analysis_button_selector"
+        android:src="@drawable/menu_background1_l" />
+
+    <ImageButton
+        android:id="@+id/backgroundButton2"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="90dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="150dp"
+        android:layout_height="250dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:background="@drawable/analysis_button_selector"
+        android:src="@drawable/menu_background2_l" />
+    
+    <ImageButton
+        android:id="@+id/backgroundButton3"
+        android:layout_marginTop="300dp"
+        android:layout_marginRight="90dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="150dp"
+        android:layout_height="250dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+		android:background="@drawable/analysis_button_selector"
+        android:src="@drawable/menu_background3_l" />
+    
+    <ImageButton
+        android:id="@+id/backgroundButton4"
+        android:layout_marginTop="300dp"
+        android:layout_marginLeft="90dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="150dp"
+        android:layout_height="250dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:background="@drawable/analysis_button_selector"
+        android:src="@drawable/menu_background4_l" />
+        
+    
+</FrameLayout>

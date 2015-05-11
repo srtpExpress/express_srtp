@@ -1,0 +1,97 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0099cc"
+    tools:context="com.special.ResideMenuDemo.ProfileActivity" >
+
+    <!--
+         The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc.
+    -->
+
+
+    <!--
+         This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows.
+    -->
+
+        
+
+    
+
+    <FrameLayout
+        android:id="@+id/profile_up"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true" >
+
+        <ImageView
+	       	android:id="@+id/User_ID"
+	       	android:layout_width="match_parent"
+	       	android:layout_height="130dp"
+	       	android:layout_marginTop="70dp"
+	    	android:gravity="center"
+	       	android:src="@drawable/user" />
+        
+        <ImageView
+	       	android:id="@+id/User_Background"
+	       	android:layout_width="match_parent"
+	       	android:layout_height="130dp"
+	       	android:layout_marginTop="70dp"
+	    	android:gravity="center"
+	       	android:src="@drawable/user_background" />
+        
+	    <TextView
+	        android:id="@+id/fullscreen_content"
+	        android:layout_width="match_parent"
+	        android:layout_height="41dp"
+	        android:layout_marginTop="200dp"
+	        android:gravity="center"
+	        android:keepScreenOn="true"
+	        android:text="Poison"
+	        android:textColor="#ffffff"
+	        android:textSize="23sp"
+	        android:textStyle="bold" />
+	    
+	    <!-- itemList -->
+        <ListView
+            android:id="@+id/profileList"
+		    android:layout_gravity="center"
+		    android:layout_marginTop="200dp"
+		    android:layout_width="fill_parent"
+		    android:layout_height="400dp"
+		    android:textColor="#000"
+		    android:background="#fff"
+		    android:dividerHeight="1dp"
+		    android:divider="#ddd"
+	    >
+        
+		</ListView>
+        <LinearLayout
+            android:id="@+id/fullscreen_content_controls"
+            style="?metaButtonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:background="@color/black_overlay"
+            android:orientation="horizontal"
+            tools:ignore="UselessParent" >
+            
+            <Button
+                android:id="@+id/signOut_button"
+                style="?metaButtonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textSize="18sp"
+                android:text="sign out" />
+
+        </LinearLayout>
+
+		
+
+    </FrameLayout>
+	
+</RelativeLayout>
