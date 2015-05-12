@@ -16,7 +16,7 @@ import com.special.ResideMenu.ResideMenu;
 public class SkinFragment  extends Fragment {
 	View parentView;
     private ResideMenu resideMenu;
-	boolean isChangeSkin = false;
+	boolean isChangeSkin = true;
 	
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

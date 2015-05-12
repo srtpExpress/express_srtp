@@ -5,10 +5,12 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import android.R.integer;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
@@ -16,13 +18,28 @@ import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.DeleteCallback;
 import com.avos.avoscloud.FindCallback;
-import com.avos.avoscloud.SaveCallback;
 import com.avos.avoscloud.LogUtil.log;
-
+import com.avos.avoscloud.*;
 
 public class AvosDatabase {
 	
-	
+	void countDatabase(final int flag){
+		AVQuery<AVObject> query = AVQuery.getQuery("PackageList"+flag);
+		query.whereEqualTo("UserID", TurnControl.user_ID);
+		query.countInBackground(new CountCallback() {
+			  public void done(int count, AVException e) {
+			    if (e == null) {
+			      if(flag==1)
+			    	  Packages.Num1=count;
+			      else {
+			    	  Packages.Num2=count;
+				}
+			    } else {
+			      // The request failed
+			    }
+			  }
+			});
+	}
 	void getDatabase(final int flag){
 		
 		Packages.CategoryPerent.add("0%");
@@ -40,9 +57,15 @@ public class AvosDatabase {
 	    cal.setTime(date);
 	    cal.add(2,-1); 
 	    Date date1=cal.getTime();
-	    
+	    AVQuery<AVObject> query1 = new AVQuery<AVObject>("PackageList2");
+	    query1.whereEqualTo("UserID",TurnControl.user_ID);
+	    query1.whereGreaterThan("createdAt", date1);
+        query1.findInBackground(new FindCallback<AVObject>() {
+			public void done(List<AVObject> packages, AVException e) {
+					TurnControl.number=packages.size();
+				}
+			});
 		query.whereEqualTo("UserID",TurnControl.user_ID);
-		//query.whereEqualTo
         query.findInBackground(new FindCallback<AVObject>() {
 			public void done(List<AVObject> packages, AVException e) {
 				
@@ -91,7 +114,7 @@ public class AvosDatabase {
 		tmpPackage.put("price", tmpList1Package.price);
 		tmpPackage.put("company", tmpList1Package.company);
 		tmpPackage.put("image", tmpList1Package.imageLoc);
-		
+		tmpPackage.put("UserID", TurnControl.user_ID);
 		tmpPackage.saveInBackground();
 		
 		AVQuery<AVObject> query = new AVQuery<AVObject>("PackageList1");
@@ -101,14 +124,14 @@ public class AvosDatabase {
 			@Override
 			public void done(AVException e) {
 				if (e == null){
-					//Toast.makeText(context, "Delete Success", Toast.LENGTH_SHORT).show();
+					Toast.makeText(context, "Delete Success", Toast.LENGTH_SHORT).show();
 				}else{
 					Toast.makeText(context, "Delete Failed", Toast.LENGTH_SHORT).show();
 				}
 				
 			}
 		});
-
+ 		log.e("ERROR",String.valueOf(Packages.List1.size()));
  		Packages.SumPrice += Double.parseDouble(tmpList1Package.price.substring(1));
  		switch (tmpList1Package.category) {
 		case "life-sytle":

@@ -9,12 +9,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 
 import org.w3c.dom.ls.LSException;
 
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.LogUtil.log;
 
 
 
@@ -78,6 +80,7 @@ public class AnimalListAdapter extends BaseAdapter
 		if (TurnControl.flagGet == 1){
 			good = Packages.List1.get(position);
 		}else{
+			//log.e("ERROR",String.valueOf(Packages.List2.size()));
 			good = Packages.List2.get(position);
 		}
 		

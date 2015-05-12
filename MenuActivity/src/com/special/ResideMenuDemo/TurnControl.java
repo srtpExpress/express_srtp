@@ -1,5 +1,7 @@
 package com.special.ResideMenuDemo;
 
+import android.R.integer;
+
 import com.avos.avoscloud.AVObject;
 
 public class TurnControl {
@@ -10,4 +12,5 @@ public class TurnControl {
 	public static String background_ID = "";
 	public static String user_ID="";
 	public static AVObject userAvObject = new AVObject("UserList");
+	public static int number=0;
 }

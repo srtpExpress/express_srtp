@@ -4,12 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.DialogInterface.OnClickListener;
+import android.content.SharedPreferences.Editor;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -18,6 +24,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
+
 import com.special.ResideMenu.ResideMenu;
 import com.special.ResideMenu.ResideMenuItem;
 
@@ -32,10 +39,52 @@ public class MenuActivity extends FragmentActivity implements View.OnClickListen
     private ResideMenuItem itemAnalysis;
     private ResideMenuItem itemSkin;
     private ResideMenuItem itemShare;
-
+    
+    String mTitleStr="haha title:";  
+    int mCount= 0;  
     /**
      * Called when the activity is first created.
      */
+
+    void mySleep(long sec)  
+    {  
+        try{  
+            Thread.sleep(sec);  
+        }  
+        catch(InterruptedException e)  
+        {  
+            e.printStackTrace();  
+        }  
+    }  
+      
+    void myAction()  
+    {  
+    	/*Toast.makeText(this, "注册成功！", Toast.LENGTH_SHORT).show();
+    	AvosDatabase avosDatabase=new AvosDatabase();
+        avosDatabase.getDatabase(1);
+        avosDatabase.getDatabase(2);*/
+    }  
+    Handler  hd = new Handler (){  
+        public void handleMessage (Message msg)  
+        {  
+            super.handleMessage(msg);     
+                myAction();                      
+                //mySleep(10000);  
+               // Message m= new Message();   
+               // hd.sendMessage(m);   
+              
+        }  
+    };  
+    Thread th = new Thread(){  
+        public  void run ()  
+        {  
+            Message m= new Message();
+            while(true){
+            mySleep(100000);   
+            hd.sendMessage(m);  
+            }
+        }  
+    };  
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +93,33 @@ public class MenuActivity extends FragmentActivity implements View.OnClickListen
         setUpMenu();
         if( savedInstanceState == null )
             changeFragment(new HomeFragment());
+        long mpid=Thread.currentThread().getId();  
+        th.start();  
+        
+        AvosDatabase avosDatabase=new AvosDatabase();
+        avosDatabase.getDatabase(1);
+        avosDatabase.getDatabase(2);
+        
+        SharedPreferences sharedPreferences=getSharedPreferences("Package", Context.MODE_PRIVATE);
+        int num1=sharedPreferences.getInt("NUM1", 0);
+        avosDatabase.countDatabase(1);
+        
+        if(Packages.Num1!=num1){
+        	
+        	NotificationManager nm = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        	Notification n = new Notification();
+        	
+        	n.icon=R.drawable.icon;
+        	n.tickerText="你有新包裹啦!";
+        	n.when = System.currentTimeMillis();   
+               
+             nm.notify(1, n);  
+        	
+        	
+        	Editor editor=sharedPreferences.edit();
+        	editor.putInt("NUM1", Packages.Num1);
+        	editor.commit();
+        }
    
     }
     public Context getContext(){

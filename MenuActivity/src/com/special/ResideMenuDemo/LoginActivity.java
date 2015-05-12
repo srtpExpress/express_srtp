@@ -204,17 +204,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 					TurnControl.userAvObject = user.get(0);
 					TurnControl.background_ID = user.get(0).getString("backgroundID");
 					TurnControl.user_ID=user.get(0).getString("ID");
-			        /*AvosDatabase avosDatabase=new AvosDatabase();
+			        AvosDatabase avosDatabase=new AvosDatabase();
 			        avosDatabase.getDatabase(1);
-			        avosDatabase.getDatabase(2);*/
-					AVQuery<AVObject> query = new AVQuery<AVObject>("PackageList2");
-					query.whereEqualTo("UserID",TurnControl.user_ID);
-					try {
-					    List<AVObject> avObjects = query.find();
-					    Packages.Num2=avObjects.size();
-					} catch (AVException e1) {
-					    Log.d("Ê§°Ü", "²éÑ¯´íÎó: " + e1.getMessage());
-					}
+			        avosDatabase.getDatabase(2);
+					
 			        
 					Intent intent=new Intent();
 					intent.setClass(LoginActivity.this, MenuActivity.class);
@@ -238,10 +231,15 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 					AVObject tmpUser = new AVObject("UserList");
 					tmpUser.put("ID", email);
 					tmpUser.put("Password", password);
-					
 					tmpUser.saveInBackground();
 					
 					Toast.makeText(LoginActivity.this, "×¢²á³É¹¦£¡", Toast.LENGTH_SHORT).show();
+					
+					sharedPreferences=getSharedPreferences("user", MODE_PRIVATE);
+					Editor editor=sharedPreferences.edit();	
+					editor.putString("name",  email);
+					editor.putString("pwd", password);
+					editor.commit();
 					
 					Intent intent=new Intent();
 					intent.setClass(LoginActivity.this,MenuActivity.class);
