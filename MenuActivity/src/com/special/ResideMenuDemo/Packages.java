@@ -8,7 +8,7 @@ public class Packages {
 	public static ArrayList<PackageInfo> List1 = new ArrayList<PackageInfo>();
 	public static int Num1 = 0;
 	public static ArrayList<PackageInfo> List2 = new ArrayList<PackageInfo>();
-	public static int Num2 = -1;
+	public static int Num2 = 0;
 	public static int SumPrice = 0;
 	public static ArrayList<String> CategoryPerent = new ArrayList<String>();
 	public static Double CategoryLife = 0.0;

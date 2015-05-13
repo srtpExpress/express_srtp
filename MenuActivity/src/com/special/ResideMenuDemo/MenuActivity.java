@@ -3,10 +3,12 @@ package com.special.ResideMenuDemo;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.R.integer;
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.AlertDialog.Builder;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -19,12 +21,14 @@ import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
 import android.text.AlteredCharSequence;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.avos.avoscloud.LogUtil.log;
 import com.special.ResideMenu.ResideMenu;
 import com.special.ResideMenu.ResideMenuItem;
 
@@ -45,7 +49,10 @@ public class MenuActivity extends FragmentActivity implements View.OnClickListen
     /**
      * Called when the activity is first created.
      */
-
+    public PendingIntent getDefalutIntent(int flags){  
+        PendingIntent pendingIntent= PendingIntent.getActivity(this, 1, new Intent(), flags);  
+        return pendingIntent;  
+    }  
     void mySleep(long sec)  
     {  
         try{  
@@ -59,10 +66,34 @@ public class MenuActivity extends FragmentActivity implements View.OnClickListen
       
     void myAction()  
     {  
-    	/*Toast.makeText(this, "注册成功！", Toast.LENGTH_SHORT).show();
     	AvosDatabase avosDatabase=new AvosDatabase();
-        avosDatabase.getDatabase(1);
-        avosDatabase.getDatabase(2);*/
+    	int num1=Packages.Num1;
+    	int num2=Packages.Num2;
+        avosDatabase.countDatabase(1);
+        avosDatabase.countDatabase(2);
+        Toast.makeText(this, String.valueOf(num1), Toast.LENGTH_SHORT).show();
+        if(num1!=Packages.Num1){
+        	NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        	int icon = R.drawable.icon;
+        	CharSequence tickerText = "1KM";
+        	long when = System.currentTimeMillis();
+            Notification notification = new Notification(icon, tickerText, when);
+        	NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
+        	//log.e("hahah",String.valueOf(num1));
+        	Context context = getApplicationContext();
+        	CharSequence contentTitle = "你有一个新包裹啦";
+        	CharSequence contentText = "点我查看详细内容";
+        	Intent notificationIntent = new Intent(this, MenuActivity.class);
+        	PendingIntent contentIntent = PendingIntent.getActivity(this, 0,notificationIntent, 0);
+        	notification.setLatestEventInfo(context, contentTitle, contentText,contentIntent);
+        	notification.defaults|=Notification.DEFAULT_ALL;
+        	 nm.notify(1, notification);
+        	avosDatabase.getDatabase(1);
+        }
+        if(num2!=Packages.Num2){
+        	avosDatabase.getDatabase(2);
+        }
+        
     }  
     Handler  hd = new Handler (){  
         public void handleMessage (Message msg)  
@@ -80,7 +111,7 @@ public class MenuActivity extends FragmentActivity implements View.OnClickListen
         {  
             Message m= new Message();
             while(true){
-            mySleep(100000);   
+            mySleep(10000);   
             hd.sendMessage(m);  
             }
         }  

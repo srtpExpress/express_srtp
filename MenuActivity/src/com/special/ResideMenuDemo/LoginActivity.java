@@ -112,7 +112,12 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				attemptRegisterin();
+				//attemptRegisterin();
+
+				Intent intent=new Intent();
+				intent.setClass(LoginActivity.this, Register.class);
+				startActivity(intent);
+				LoginActivity.this.finish();
 			}
 		});
 		mLoginFormView = findViewById(R.id.login_form);

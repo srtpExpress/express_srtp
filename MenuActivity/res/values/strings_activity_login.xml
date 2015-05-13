@@ -5,8 +5,13 @@
     <!-- Strings related to login -->
     <string name="prompt_email">邮箱</string>
     <string name="prompt_password">密码 </string>
+    <string name="prompt_password_repeat">再次输入密码 </string>
+    <string name="prompt_Tel">手机电话</string>
+    <string name="prompt_message">验证码</string>
     <string name="action_sign_in">登录</string>
     <string name="action_register_in">注册</string>
+    <string name="action_register_in_next">下一步</string>
+    <string name="action_message_in">获取验证码</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
