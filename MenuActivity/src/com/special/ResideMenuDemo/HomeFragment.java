@@ -47,6 +47,12 @@ public class HomeFragment extends Fragment {
                 resideMenu.openMenu(ResideMenu.DIRECTION_LEFT);
             }
         });
+        parentView.findViewById(R.id.main_share).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resideMenu.openMenu(ResideMenu.DIRECTION_LEFT);
+            }
+        });
         home_sum_text.setText(String.valueOf(TurnControl.number));
         // add gesture operation's ignored views
        // FrameLayout ignored_view = (FrameLayout) parentView.findViewById(R.id.ignored_view);

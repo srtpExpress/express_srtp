@@ -163,14 +163,18 @@ public class ProfileActivity extends Activity {
 	 * system UI. This is to prevent the jarring behavior of controls going away
 	 * while interacting with activity UI.
 	 */
+
 	View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
 		@Override
 		public boolean onTouch(View view, MotionEvent motionEvent) {
 			Intent intent = new Intent();
 			intent.setClass(ProfileActivity.this, LoginActivity.class);
 			startActivity(intent);
-			ProfileActivity.this.finish();
-			
+			ProfileActivity.this.onDestroy();
+			Intent intent1 = new Intent();
+			intent1.putExtra("data", "this is data from broadcast");
+			intent1.setAction("close");
+			sendBroadcast(intent1);
 			if (AUTO_HIDE) {
 				delayedHide(AUTO_HIDE_DELAY_MILLIS);
 			}

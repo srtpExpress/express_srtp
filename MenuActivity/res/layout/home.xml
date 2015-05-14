@@ -63,7 +63,7 @@
     	    android:background="@drawable/main_get_butto" />
 
 		<!-- 点赞分享按钮 -->
-		<LinearLayout
+	<LinearLayout
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:layout_marginLeft="30dp"
@@ -71,21 +71,26 @@
 		    android:layout_marginTop="20dp"
 		    android:orientation="horizontal" >
 		    
-		    <ImageView
+		    
+		    <Button
 		        android:id="@+id/main_like"
 		        android:layout_width="match_parent"
-		        android:layout_height="wrap_content"
-		        android:layout_marginRight="10dp"
+		        android:layout_height="50dp"
+		        android:scaleType="fitXY"
+		        android:layout_marginLeft="10dp"
+		        android:layout_marginTop="15dp"
 		        android:layout_weight="1"
-		        android:src="@drawable/main_like_button" />
+		        android:background="@drawable/main_like_button" />
 		    
-		    <ImageView
+		    <Button
 		        android:id="@+id/main_share"
 		        android:layout_width="match_parent"
-		        android:layout_height="wrap_content"
+		        android:layout_height="50dp"
+		        android:scaleType="fitXY"
 		        android:layout_marginLeft="10dp"
+		        android:layout_marginTop="15dp"
 		        android:layout_weight="1"
-		        android:src="@drawable/main_share_button" />
+		        android:background="@drawable/main_share_button" />
 		    		    
 		</LinearLayout>
 

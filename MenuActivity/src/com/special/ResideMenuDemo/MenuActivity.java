@@ -9,8 +9,10 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.AlertDialog.Builder;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.DialogInterface.OnClickListener;
 import android.content.SharedPreferences.Editor;
@@ -43,7 +45,7 @@ public class MenuActivity extends FragmentActivity implements View.OnClickListen
     private ResideMenuItem itemAnalysis;
     private ResideMenuItem itemSkin;
     private ResideMenuItem itemShare;
-    
+    static MenuActivity menuActivity;
     String mTitleStr="haha title:";  
     int mCount= 0;  
     /**
@@ -71,7 +73,7 @@ public class MenuActivity extends FragmentActivity implements View.OnClickListen
     	int num2=Packages.Num2;
         avosDatabase.countDatabase(1);
         avosDatabase.countDatabase(2);
-        Toast.makeText(this, String.valueOf(num1), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, String.valueOf(num1), Toast.LENGTH_SHORT).show();
         if(num1!=Packages.Num1){
         	NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         	int icon = R.drawable.icon;
@@ -111,8 +113,8 @@ public class MenuActivity extends FragmentActivity implements View.OnClickListen
         {  
             Message m= new Message();
             while(true){
-            mySleep(10000);   
-            hd.sendMessage(m);  
+            	mySleep(10000);   
+            	hd.sendMessage(m);
             }
         }  
     };  
@@ -121,6 +123,7 @@ public class MenuActivity extends FragmentActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         mContext = this;
+        menuActivity=this;
         setUpMenu();
         if( savedInstanceState == null )
             changeFragment(new HomeFragment());
@@ -128,9 +131,6 @@ public class MenuActivity extends FragmentActivity implements View.OnClickListen
         th.start();  
         
         AvosDatabase avosDatabase=new AvosDatabase();
-        avosDatabase.getDatabase(1);
-        avosDatabase.getDatabase(2);
-        
         SharedPreferences sharedPreferences=getSharedPreferences("Package", Context.MODE_PRIVATE);
         int num1=sharedPreferences.getInt("NUM1", 0);
         avosDatabase.countDatabase(1);
@@ -244,6 +244,7 @@ public class MenuActivity extends FragmentActivity implements View.OnClickListen
             Intent intent = new Intent();
         	intent.setClass(MenuActivity.this, ProfileActivity.class);
         	startActivity(intent);
+        	//MenuActivity.this.onDestroy();
         }else if(view == itemShare){
         	TurnControl.curFragment = 3;
         }else if (view == itemSkin){
@@ -252,12 +253,13 @@ public class MenuActivity extends FragmentActivity implements View.OnClickListen
         }else if (view == itemAnalysis){
             Packages.calc();
 	        TurnControl.curFragment = 5;
-	    	changeFragment(new AnalysisFragment());
+	    	changeFragment(new AnalysisPieFragment());
         }else if (view == itemSignOut){
         	Intent intent = new Intent();
         	intent.setClass(MenuActivity.this, LoginActivity.class);
         	startActivity(intent);
-        	finish();
+        	MenuActivity.this.onDestroy();
+        	hd.removeCallbacks(th);
         }
 
         resideMenu.closeMenu();
