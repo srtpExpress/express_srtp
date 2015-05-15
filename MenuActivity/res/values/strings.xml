@@ -11,5 +11,5 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_list_view">ListView</string>
     <string name="title_activity_profiles">Profiles</string>
-
+	<string name="weibo">真方便，我正在使用1KM取包裹(伪)</string>
 </resources>
