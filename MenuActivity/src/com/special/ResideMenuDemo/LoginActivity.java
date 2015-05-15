@@ -15,6 +15,8 @@ import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build.VERSION;
@@ -70,6 +72,27 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 	private View mProgressView;
 	private View mLoginFormView;
 	private SharedPreferences sharedPreferences;
+	public static boolean isConnect(Context context) { 
+        // 获取手机所有连接管理对象（包括对wi-fi,net等连接的管理） 
+    try { 
+        ConnectivityManager connectivity = (ConnectivityManager) context 
+                .getSystemService(Context.CONNECTIVITY_SERVICE); 
+        if (connectivity != null) { 
+            // 获取网络连接管理的对象 
+            NetworkInfo info = connectivity.getActiveNetworkInfo(); 
+            if (info != null&& info.isConnected()) { 
+                // 判断当前网络是否已经连接 
+                if (info.getState() == NetworkInfo.State.CONNECTED) { 
+                    return true; 
+                } 
+            } 
+        } 
+    } catch (Exception e) { 
+// TODO: handle exception 
+    Log.v("error",e.toString()); 
+} 
+        return false; 
+    } 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -83,7 +106,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 		mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
 		mEmailView.setText(temp_nameString);
 		populateAutoComplete();
-		
 		mPasswordView = (EditText)findViewById(R.id.password);
 		mPasswordView.setText(temp_passwordString);
 		mPasswordView
@@ -92,7 +114,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 					public boolean onEditorAction(TextView textView, int id,
 							KeyEvent keyEvent) {
 						if (id == R.id.login || id == EditorInfo.IME_NULL) {
-							attemptLogin();
+								attemptLogin();
 							return true;
 						}
 						return false;
@@ -104,7 +126,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 		mEmailSignInButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				attemptLogin();				
+				if(isConnect(getApplicationContext())==true)
+					attemptLogin();	
+				else {
+					Toast.makeText(LoginActivity.this, "请检查互联网转态！", Toast.LENGTH_SHORT).show();
+				}
 			}
 		});
 		mEmailRegisterButton.setOnClickListener(new OnClickListener() {
@@ -113,11 +139,15 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				//attemptRegisterin();
-
-				Intent intent=new Intent();
-				intent.setClass(LoginActivity.this, Register.class);
-				startActivity(intent);
-				LoginActivity.this.finish();
+				if(isConnect(getApplicationContext())==true){
+					Intent intent=new Intent();
+					intent.setClass(LoginActivity.this, Register.class);
+					startActivity(intent);
+					LoginActivity.this.finish();
+				}
+				else {
+					Toast.makeText(LoginActivity.this, "请检查互联网转态！", Toast.LENGTH_SHORT).show();
+				}
 			}
 		});
 		mLoginFormView = findViewById(R.id.login_form);
